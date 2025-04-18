@@ -259,15 +259,33 @@ async def search_indicators(search_term: str = Query("US GDP", description="Term
 
 @app.get("/search-options")
 async def search_indicators_options(search_term: str = Query("US GDP", description="Term to search for options")):
-    """Searches TE indicators and formats them for an optionsEndpoint dropdown."""
+    """Searches TE indicators and formats them for an optionsEndpoint dropdown.
+    If the search_term looks like an indicator ID (e.g., contains '/'),
+    it returns that ID as the only option.
+    """
     try:
         logger.info(f"Received search options request for: {search_term}")
-        # Run the search (which also adds indicator_id)
-        results_list = await asyncio.to_thread(run_tedata_search, search_term)
-        # Format for options
-        options = format_search_results_for_options(results_list)
-        logger.info(f"Search options for {search_term} returned {len(options)} options.")
-        return JSONResponse(content=options)
+
+        # Check if the search_term looks like an indicator ID
+        # A simple check for '/' is used here, can be made more robust if needed
+        if "/" in search_term:
+            logger.info(f"Search term '{search_term}' looks like an indicator ID. Returning as single option.")
+            # Format the ID as a single option for the dropdown
+            options = [{
+                "label": search_term, # Use the ID itself as the label
+                "value": search_term
+            }]
+            return JSONResponse(content=options)
+        else:
+            # If not an ID, perform the search as usual
+            logger.info(f"Search term '{search_term}' does not look like an ID. Performing search.")
+            # Run the search (which also adds indicator_id)
+            results_list = await asyncio.to_thread(run_tedata_search, search_term)
+            # Format for options
+            options = format_search_results_for_options(results_list)
+            logger.info(f"Search options for {search_term} returned {len(options)} options.")
+            return JSONResponse(content=options)
+
     except Exception as e:
         logger.exception(f"Unhandled exception in /search-options for {search_term}: {str(e)}")
         # Return empty list on error for options endpoint to prevent UI freezing

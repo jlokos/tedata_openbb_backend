@@ -5,6 +5,7 @@
     "category": "Trading Economics",
     "endpoint": "/search",
     "type": "table",
+    "groupId": "tedata_group",
     "params": [
       {
         "paramName": "search_term",
@@ -53,14 +54,15 @@
     "category": "Trading Economics",
     "endpoint": "/scrape",
     "type": "table",
+    "groupId": "tedata_group",
     "params": [
       {
         "paramName": "search_term",
-        "label": "Indicator ID (Select from Search)",
+        "label": "Indicator ID",
         "type": "text",
         "required": false,
         "value": "united-states/gdp",
-        "description": "Indicator ID (e.g., united-states/gdp). Click an ID in the Search table above."
+        "description": "Indicator ID (e.g., united-states/gdp). Gets updated when you click an ID in the Search table."
       },
       {
         "paramName": "method",
@@ -88,14 +90,15 @@
     "category": "Trading Economics",
     "endpoint": "/metadata",
     "type": "markdown",
+    "groupId": "tedata_group",
     "params": [
       {
         "paramName": "search_term",
-        "label": "Indicator",
+        "label": "Indicator ID",
         "type": "text",
         "required": false,
         "value": "united-states/gdp",
-        "description": "Indicator ID from Trading Economics (e.g., united-states/gdp)"
+        "description": "Indicator ID (e.g., united-states/gdp). Gets updated when you click an ID in the Search table."
       },
       {
         "paramName": "format_type",
