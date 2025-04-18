@@ -1,7 +1,10 @@
+
+
 # TedataBB
 
 Trading Economics data backend to be used by OpenBB Workspace.
 
+![2025-04-18 at 01 34 31@2x](https://github.com/user-attachments/assets/ee43468c-5dfd-4bdd-8727-df1fe1b777ce)
 ## Getting Started
 
 This custom backend provides access to Trading Economics data from within the OpenBB Workspace platform, allowing you to search and visualize economic indicators.
@@ -106,7 +109,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Acknowledgment
 
-- [tedata](https://github.com/HelloThereMatey/tedata) Z
+- [tedata](https://github.com/HelloThereMatey/tedata)
 
 
 
