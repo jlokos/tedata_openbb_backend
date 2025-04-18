@@ -56,13 +56,11 @@
     "params": [
       {
         "paramName": "search_term",
-        "label": "Indicator (Select from Search)",
-        "type": "endpoint",
+        "label": "Indicator ID (Select from Search)",
+        "type": "text",
         "required": false,
         "value": "united-states/gdp",
-        "optionsEndpoint": "/search-options",
-        "description": "Select indicator from search results above.",
-        "style": { "popupWidth": 450 }
+        "description": "Indicator ID (e.g., united-states/gdp). Click an ID in the Search table above."
       },
       {
         "paramName": "method",
