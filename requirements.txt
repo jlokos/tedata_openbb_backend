@@ -1,0 +1,4 @@
+fastapi
+uvicorn[standard]
+tedata>=0.3.51
+pandas 

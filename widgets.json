@@ -1,0 +1,120 @@
+{
+  "tedata_search": {
+    "name": "Tedata Search",
+    "description": "Search Trading Economics indicators using tedata",
+    "category": "Trading Economics",
+    "endpoint": "/search",
+    "type": "table",
+    "params": [
+      {
+        "paramName": "search_term",
+        "label": "Search Term",
+        "type": "text",
+        "required": false,
+        "value": "US GDP",
+        "description": "Enter the term to search for on Trading Economics."
+      }
+    ],
+    "data": {
+      "table": {
+        "columnsDefs": [
+          {
+            "field": "country",
+            "headerName": "Country"
+          },
+          {
+            "field": "metric",
+            "headerName": "Metric"
+          },
+          {
+            "field": "indicator_id",
+            "headerName": "Indicator ID (Click to Select)",
+            "renderFn": "cellOnClick",
+            "renderFnParams": {
+              "actionType": "groupBy",
+              "groupByParamName": "search_term"
+            }
+          },
+          {
+            "field": "url",
+            "headerName": "Full URL"
+          }
+        ]
+      }
+    },
+    "gridData": {
+      "w": 12,
+      "h": 6
+    }
+  },
+  "tedata_scrape": {
+    "name": "Tedata Scrape",
+    "description": "Scrape time-series data for a Trading Economics indicator using tedata",
+    "category": "Trading Economics",
+    "endpoint": "/scrape",
+    "type": "table",
+    "params": [
+      {
+        "paramName": "search_term",
+        "label": "Indicator (Select from Search)",
+        "type": "endpoint",
+        "required": false,
+        "value": "united-states/gdp",
+        "optionsEndpoint": "/search-options",
+        "description": "Select indicator from search results above.",
+        "style": { "popupWidth": 450 }
+      },
+      {
+        "paramName": "method",
+        "label": "Scraping Method",
+        "type": "text",
+        "required": false,
+        "value": "highcharts_api",
+        "options": [
+          { "label": "Highcharts API", "value": "highcharts_api" },
+          { "label": "Path", "value": "path" },
+          { "label": "Tooltips", "value": "tooltips" },
+          { "label": "Mixed", "value": "mixed" }
+        ],
+        "description": "The scraping method to use (highcharts_api is recommended)."
+      }
+    ],
+    "gridData": {
+      "w": 12,
+      "h": 8
+    }
+  },
+  "tedata_metadata": {
+    "name": "Tedata Metadata",
+    "description": "Get detailed metadata for a Trading Economics indicator using tedata",
+    "category": "Trading Economics",
+    "endpoint": "/metadata",
+    "type": "markdown",
+    "params": [
+      {
+        "paramName": "search_term",
+        "label": "Indicator",
+        "type": "text",
+        "required": false,
+        "value": "united-states/gdp",
+        "description": "Indicator ID from Trading Economics (e.g., united-states/gdp)"
+      },
+      {
+        "paramName": "format_type",
+        "label": "Display Format",
+        "type": "text",
+        "required": false,
+        "value": "pretty",
+        "options": [
+          { "label": "Pretty Markdown", "value": "pretty" },
+          { "label": "JSON Format", "value": "json" }
+        ],
+        "description": "Choose how to display the metadata (JSON or Pretty format)."
+      }
+    ],
+    "gridData": {
+      "w": 12,
+      "h": 6
+    }
+  }
+} 
