@@ -280,19 +280,17 @@ async def scrape_indicator_data(
     search_term: str = Query(
         "united-states/gdp",
         description="Indicator ID selected from search (e.g., united-states/gdp)",
-    ),
-    method: Optional[str] = Query(
-        "highcharts_api",
-        description='Scraping method ("highcharts_api", "path", "tooltips", "mixed")',
-    ),
+    )
 ):
     """Scrapes time-series data for a specific Trading Economics indicator."""
-    valid_methods = ["highcharts_api", "path", "tooltips", "mixed"]
-    if method not in valid_methods:
-        raise HTTPException(
-            status_code=400,
-            detail=f"Invalid method {method}. Valid methods are: {', '.join(valid_methods)}",
-        )
+    # valid_methods = ["highcharts_api", "path", "tooltips", "mixed"]
+    # if method not in valid_methods:
+    #     raise HTTPException(
+    #         status_code=400,
+    #         detail=f"Invalid method {method}. Valid methods are: {', '.join(valid_methods)}",
+    #     )
+
+    method = "highcharts_api"
 
     # Use the search_term as the potential ID/URL, extract the actual ID
     actual_indicator_id = _extract_id_from_url(search_term)
@@ -333,14 +331,12 @@ async def get_indicator_metadata(
         "united-states/gdp",
         description="Indicator ID selected from search (e.g., united-states/gdp)",
     ),
-    format_type: str = Query(
-        default="pretty",
-        description="Format type for metadata display: 'pretty' for formatted markdown or 'json' for raw JSON format",
-    ),
 ):
     """Retrieves metadata for a specific Trading Economics indicator as Markdown."""
     # Use the search_term as the potential ID/URL, extract the actual ID
     actual_indicator_id = _extract_id_from_url(search_term)
+
+    format_type = "pretty"
 
     if not actual_indicator_id or "/" not in actual_indicator_id:
         # Check the extracted ID format again after potential parsing
