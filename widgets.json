@@ -61,20 +61,6 @@
         "required": false,
         "value": "united-states/gdp",
         "description": "Indicator ID (e.g., united-states/gdp). Click an ID in the Search table above."
-      },
-      {
-        "paramName": "method",
-        "label": "Scraping Method",
-        "type": "text",
-        "required": false,
-        "value": "highcharts_api",
-        "options": [
-          { "label": "Highcharts API", "value": "highcharts_api" },
-          { "label": "Path", "value": "path" },
-          { "label": "Tooltips", "value": "tooltips" },
-          { "label": "Mixed", "value": "mixed" }
-        ],
-        "description": "The scraping method to use (highcharts_api is recommended)."
       }
     ],
     "gridData": {
@@ -96,18 +82,6 @@
         "required": false,
         "value": "united-states/gdp",
         "description": "Indicator ID from Trading Economics (e.g., united-states/gdp)"
-      },
-      {
-        "paramName": "format_type",
-        "label": "Display Format",
-        "type": "text",
-        "required": false,
-        "value": "pretty",
-        "options": [
-          { "label": "Pretty Markdown", "value": "pretty" },
-          { "label": "JSON Format", "value": "json" }
-        ],
-        "description": "Choose how to display the metadata (JSON or Pretty format)."
       }
     ],
     "gridData": {

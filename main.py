@@ -219,6 +219,23 @@ def format_search_results_for_options(results: List[dict]) -> List[dict]:
 
 # --- API Endpoints ---
 
+@app.get("/templates.json")
+async def get_templates_config():
+    """Serves the templates.json configuration file."""
+    try:
+        with open("templates.json", "r") as f:
+            templates_config = json.load(f)
+        return JSONResponse(content=templates_config)
+    except FileNotFoundError:
+        logger.error("templates.json not found!")
+        raise HTTPException(status_code=500, detail="Template configuration file not found.")
+    except json.JSONDecodeError:
+        logger.error("templates.json is not valid JSON!")
+        raise HTTPException(status_code=500, detail="Template configuration file is invalid.")
+    except Exception as e:
+        logger.error(f"Error reading templates.json: {str(e)}")
+        raise HTTPException(status_code=500, detail="Could not read template configuration.")   
+
 
 @app.get("/widgets.json")
 async def get_widgets_config():
@@ -280,19 +297,17 @@ async def scrape_indicator_data(
     search_term: str = Query(
         "united-states/gdp",
         description="Indicator ID selected from search (e.g., united-states/gdp)",
-    ),
-    method: Optional[str] = Query(
-        "highcharts_api",
-        description='Scraping method ("highcharts_api", "path", "tooltips", "mixed")',
-    ),
+    )
 ):
     """Scrapes time-series data for a specific Trading Economics indicator."""
-    valid_methods = ["highcharts_api", "path", "tooltips", "mixed"]
-    if method not in valid_methods:
-        raise HTTPException(
-            status_code=400,
-            detail=f"Invalid method {method}. Valid methods are: {', '.join(valid_methods)}",
-        )
+    # valid_methods = ["highcharts_api", "path", "tooltips", "mixed"]
+    # if method not in valid_methods:
+    #     raise HTTPException(
+    #         status_code=400,
+    #         detail=f"Invalid method {method}. Valid methods are: {', '.join(valid_methods)}",
+    #     )
+
+    method = "highcharts_api"
 
     # Use the search_term as the potential ID/URL, extract the actual ID
     actual_indicator_id = _extract_id_from_url(search_term)
@@ -333,14 +348,12 @@ async def get_indicator_metadata(
         "united-states/gdp",
         description="Indicator ID selected from search (e.g., united-states/gdp)",
     ),
-    format_type: str = Query(
-        default="pretty",
-        description="Format type for metadata display: 'pretty' for formatted markdown or 'json' for raw JSON format",
-    ),
 ):
     """Retrieves metadata for a specific Trading Economics indicator as Markdown."""
     # Use the search_term as the potential ID/URL, extract the actual ID
     actual_indicator_id = _extract_id_from_url(search_term)
+
+    format_type = "pretty"
 
     if not actual_indicator_id or "/" not in actual_indicator_id:
         # Check the extracted ID format again after potential parsing
