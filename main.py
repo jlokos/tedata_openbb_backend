@@ -219,6 +219,23 @@ def format_search_results_for_options(results: List[dict]) -> List[dict]:
 
 # --- API Endpoints ---
 
+@app.get("/templates.json")
+async def get_templates_config():
+    """Serves the templates.json configuration file."""
+    try:
+        with open("templates.json", "r") as f:
+            templates_config = json.load(f)
+        return JSONResponse(content=templates_config)
+    except FileNotFoundError:
+        logger.error("templates.json not found!")
+        raise HTTPException(status_code=500, detail="Template configuration file not found.")
+    except json.JSONDecodeError:
+        logger.error("templates.json is not valid JSON!")
+        raise HTTPException(status_code=500, detail="Template configuration file is invalid.")
+    except Exception as e:
+        logger.error(f"Error reading templates.json: {str(e)}")
+        raise HTTPException(status_code=500, detail="Could not read template configuration.")   
+
 
 @app.get("/widgets.json")
 async def get_widgets_config():

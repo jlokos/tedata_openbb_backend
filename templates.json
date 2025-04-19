@@ -1,0 +1,63 @@
+[
+  {
+    "name": "Tedata",
+    "img": "https://avatars.githubusercontent.com/u/45024776?v=4",
+    "img_dark": "https://avatars.githubusercontent.com/u/45024776?v=4",
+    "img_light": "https://avatars.githubusercontent.com/u/45024776?v=4",
+    "description": "The Macro Bootlegger template",
+    "allowCustomization": true,
+    "tabs": {
+      "overview": {
+        "id": "overview",
+        "name": "overview",
+        "layout": [
+          {
+            "i": "tedata_search",
+            "x": 0,
+            "y": 0,
+            "w": 40,
+            "h": 12,
+            "state": {
+              "chartView": {
+                "enabled": false,
+                "chartType": "line"
+              }
+            }
+          },
+          {
+            "i": "tedata_scrape",
+            "x": 18,
+            "y": 12,
+            "w": 22,
+            "h": 16,
+            "state": {
+              "chartView": {
+                "enabled": true,
+                "chartType": "line"
+              }
+            }
+          },
+          {
+            "i": "tedata_metadata",
+            "x": 0,
+            "y": 12,
+            "w": 18,
+            "h": 16
+          }
+        ]
+      }
+    },
+    "groups": [
+      {
+        "name": "Group 1",
+        "type": "param",
+        "paramName": "search_term",
+        "defaultValue": "united-states/gdp",
+        "widgetIds": [
+          "tedata_scrape",
+          "tedata_metadata"
+        ]
+      }
+    ]
+  }
+]
