@@ -9,6 +9,10 @@ Trading Economics data backend to be used by OpenBB Workspace.
 
 This custom backend provides access to Trading Economics data from within the OpenBB Workspace platform, allowing you to search and visualize economic indicators.
 
+## Disclaimer
+
+This tool is for personal, educational, and research purposes only. 
+
 ### Prerequisites
 
 - Python 3.8+
